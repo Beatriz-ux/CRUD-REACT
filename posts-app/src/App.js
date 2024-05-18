@@ -2,25 +2,29 @@ import React from 'react';
 import logo from './logo.svg';
 import './App.css';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+class  App extends React.Component {
+  render() {
+    return (
+      <>
+        <nav className="navbar navbar-expand-lg navbar-light bg-light">
+          <a className="navbar-brand" href="/">Post App</a>
+          <button className="navbar-toggler" 
+            type="button" 
+            data-toggle="collapse" 
+            data-target="#navbarMenu" 
+            aria-controls="navbarMenu">
+            <span className="navbar-toggler-icon"></span>
+          </button>
+          <div className="collapse navbar-collapse" id="navbarMenu">
+            <div className="navbar-nav">
+              <a href="/" className="nav-item nav-link">Home</a>
+              <a href="/" className="nav-item nav-link">Posts</a>
+            </div>
+          </div>
+        </nav>
+      </>
+    );
+  }
 }
 
 export default App;
