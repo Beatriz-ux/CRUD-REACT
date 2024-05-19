@@ -1,5 +1,7 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import authService from "../../services/auth.service";
+import { Axios, AxiosError } from "axios";
 
 class Login extends React.Component {
   constructor(props) {
@@ -21,24 +23,33 @@ class Login extends React.Component {
       password: this.state.password,
     };
 
-    if (!data.email || data.email == "") {
+    if (!data.email || data.email === "") {
       window.alert("E-mail é obrigatório");
       return;
     }
 
-    if (!data.password || data.password == "") {
+    if (!data.password || data.password === "") {
       window.alert("Senha é obrigatória");
       return;
     }
 
     try {
       let res = await authService.sendLogin(data);
-      authService.setLoggedUser(res.data.data);
-      this.props.onLogin();
-      this.props.history.replace("/");
+      console.log("res", res);
+      if (res.status === 200) {
+        authService.setLoggedUser(res.data.data);
+        // this.props.onLogin();
+        this.props.navigate("/");
+      } else {
+        window.alert("Credenciais inválidas.");
+      }
     } catch (error) {
+      if (error instanceof AxiosError){
+          window.alert(error.response.data);
+      }else{
+        window.alert("Erro ao efetuar login.");
+      }
       console.log("error", error);
-      window.alert("Não foi possível efetuar o login.");
     }
   }
 
@@ -81,4 +92,10 @@ class Login extends React.Component {
   }
 }
 
-export default Login;
+// Função para encapsular o componente de classe com `useNavigate`
+function LoginWrapper(props) {
+  const navigate = useNavigate();
+  return <Login {...props} navigate={navigate} />;
+}
+
+export default LoginWrapper;
