@@ -27,7 +27,29 @@
 .App-link {
   color: #61dafb;
 }
+.nav-user{
+  margin-left: auto;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
 
+.nav-user__info{
+  margin-right: 15px;
+}
+
+.nav-user__info h4{
+  color: #333;
+  font-size: 16px;
+  font-weight: bold;
+  margin: 0;
+}
+
+.nav-user__info p{
+  color: #666;
+  font-size: 12px;
+  margin: 0;
+}
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);
